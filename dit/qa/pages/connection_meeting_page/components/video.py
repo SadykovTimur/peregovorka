@@ -1,12 +1,13 @@
 from coms.qa.frontend.pages.component import Component, ComponentWrapper
 from coms.qa.frontend.pages.component.button import Button
+from coms.qa.frontend.pages.component.text_field import TextField
 
 __all__ = ['Video']
 
 
 class VideoWrapper(ComponentWrapper):
     connect_meet = Component(css='[class*="title"]')
-    drop_down = Button(css='[class*="actionButton"]')
+    connect = Button(css='[class*="actionButton"]')
     toolbox = Component(id="new-toolbox")
     preview = Component(id="preview")
     timer = Component(css='[class*="timer"]')
@@ -19,6 +20,7 @@ class VideoWrapper(ComponentWrapper):
     go_record = Button(id="modal-dialog-ok-button")
     exit = Button(css='[class*="hangup-button"]')
     title_exit = Component(id="thanksMessage")
+    user = TextField(css='[data-testid="prejoin.screen"] input')
 
 
 class Video(Component):

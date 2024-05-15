@@ -33,7 +33,7 @@ class StartPage(Page):
                 assert self.main.connect.visible
                 assert self.main.meet_name.visible
 
-                return self.main.input_mode.visible
+                return self.main.meet_link.visible
 
             except NoSuchElementException:
 

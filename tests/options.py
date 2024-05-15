@@ -9,7 +9,7 @@ def pytest_addoption(parser):
         '--ui_url',
         help='A way to override the ui_url for your tests.',
         metavar='ui_url',
-        default='testperegovorka.mos.ru',
+        default='peregovorka.mos.ru',
     )
 
     parser.addoption(

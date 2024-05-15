@@ -18,7 +18,12 @@ class ConnectionMeetingPage(Page):
 
     def click_meet(self) -> None:
         self.driver.switch_to.frame(self.iframe.webelement)
-        self.video.drop_down.click()
+        self.video.connect.click()
+        self.driver.switch_to.default_content()
+
+    def data_input(self, user: str) -> None:
+        self.driver.switch_to.frame(self.iframe.webelement)
+        self.video.user.send_keys(user)
         self.driver.switch_to.default_content()
 
     def wait_for_loading_connection(self) -> None:
@@ -27,7 +32,7 @@ class ConnectionMeetingPage(Page):
         def condition() -> bool:
             try:
                 assert self.video.connect_meet.visible
-                assert self.video.drop_down.visible
+                assert self.video.connect.visible
                 assert self.video.toolbox.visible
                 assert self.video.preview.visible
 
