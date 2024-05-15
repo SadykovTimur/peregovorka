@@ -6,8 +6,8 @@ __all__ = ['Main']
 
 
 class MainWrapper(ComponentWrapper):
-    connect = Component(xpath="//span[text()='Присоединиться']")
-    input_mode = Component(xpath="//label[text()='Идентификатор встречи']")
+    connect = Button(xpath="//span[text()='Присоединиться']")
+    meet_link = TextField(css="input[class*='mud-input-slot']")
     meet_name = TextField(css='input[class*="mud-input-slot"]')
     meeting = Component(xpath="//span[text()='Запланировать встречу']")
     create_meeting = Button(xpath="//span[text()='Создать встречу']")

@@ -7,7 +7,7 @@ __all__ = ['Header']
 class HeaderWrapper(ComponentWrapper):
     menu_btn = Component(css="[class*='mud-icon-button-edge-start']")
     auth = Button(xpath='//span[text()="Войти"]')
-    user = Component(xpath="//p[text()='ФИО не заполнено']")
+    user = Component(css='[class*="avatar"]')
 
 
 class Header(Component):

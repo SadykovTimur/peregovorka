@@ -14,6 +14,7 @@ __all__ = [
     'open_start_page_after_auth',
     'open_connection_meeting',
     'logout',
+    'connection_meeting',
 ]
 
 
@@ -92,11 +93,31 @@ def open_connection_meeting(app: Application, meet: str) -> None:
     with allure.step('Opening Connection meeting page'):
         try:
             start_page = StartPage(app)
-            start_page.main.input_auth.send_keys(meet)
+            start_page.main.meet_name.send_keys(meet)
             start_page.main.create_meeting.click()
 
             connection_meeting_page = ConnectionMeetingPage(app)
             connection_meeting_page.wait_for_loading_connection()
+            connection_meeting_page.click_meet()
+            connection_meeting_page.wait_for_loading_connection_meeting()
+
+            screenshot_attach(app, 'connection_meeting_page')
+        except Exception as e:
+            screenshot_attach(app, 'connection_meeting_page_error')
+
+            raise TimeoutError('Connection meeting page was not loaded') from e
+
+
+def connection_meeting(app: Application, link: str, user: str) -> None:
+    with allure.step('Connection meeting page'):
+        try:
+            start_page = StartPage(app)
+            start_page.main.meet_link.send_keys(link)
+            start_page.main.connect.click()
+
+            connection_meeting_page = ConnectionMeetingPage(app)
+            connection_meeting_page.wait_for_loading_connection()
+            connection_meeting_page.data_input(user)
             connection_meeting_page.click_meet()
             connection_meeting_page.wait_for_loading_connection_meeting()
 
