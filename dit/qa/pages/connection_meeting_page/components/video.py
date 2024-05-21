@@ -22,6 +22,12 @@ class VideoWrapper(ComponentWrapper):
     title_exit = Component(id="thanksMessage")
     user = TextField(css='[data-testid="prejoin.screen"] input')
 
+    dialog_btn = Button(css='[class*="dialog"]')
+    start_record = Button(xpath="//span[text()='Начать запись']")
+    start_dialog = Button(id="modal-dialog-ok-button")
+
+    always_visible = Component(id="alwaysVisible")
+
 
 class Video(Component):
     def __get__(self, instance, owner) -> VideoWrapper:
