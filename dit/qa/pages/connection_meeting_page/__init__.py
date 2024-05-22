@@ -26,6 +26,13 @@ class ConnectionMeetingPage(Page):
         self.video.user.send_keys(user)
         self.driver.switch_to.default_content()
 
+    def start_record(self) -> None:
+        self.driver.switch_to.frame(self.iframe.webelement)
+        self.video.dialog_btn.click()
+        self.video.start_record.click()
+        self.video.start_dialog.click()
+        self.driver.switch_to.default_content()
+
     def wait_for_loading_connection(self) -> None:
         self.driver.switch_to.frame(self.iframe.webelement)
 
@@ -74,6 +81,23 @@ class ConnectionMeetingPage(Page):
         def condition() -> bool:
             try:
                 return self.video.title_exit.visible
+
+            except NoSuchElementException:
+
+                return False
+
+        self.app.set_implicitly_wait(1)
+        wait_for(condition, msg="Page was not loaded")
+        self.app.restore_implicitly_wait()
+
+        self.driver.switch_to.default_content()
+
+    def wait_record_meeting(self) -> None:
+        self.driver.switch_to.frame(self.iframe.webelement)
+
+        def condition() -> bool:
+            try:
+                return self.video.always_visible.visible
 
             except NoSuchElementException:
 

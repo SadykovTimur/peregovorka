@@ -1,4 +1,4 @@
-from coms.qa.frontend.pages.component import Component, ComponentWrapper
+from coms.qa.frontend.pages.component import Component, Components, ComponentWrapper
 from coms.qa.frontend.pages.component.button import Button
 from coms.qa.frontend.pages.component.text_field import TextField
 
@@ -11,6 +11,7 @@ class MainWrapper(ComponentWrapper):
     meet_name = TextField(css='input[class*="mud-input-slot"]')
     meeting = Component(xpath="//span[text()='Запланировать встречу']")
     create_meeting = Button(xpath="//span[text()='Создать встречу']")
+    connect_meet = Components(class_name='mud-card-actions')
 
 
 class Main(Component):

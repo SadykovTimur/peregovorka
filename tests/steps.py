@@ -15,6 +15,7 @@ __all__ = [
     'open_connection_meeting',
     'logout',
     'connection_meeting',
+    'record_meeting',
 ]
 
 
@@ -93,8 +94,13 @@ def open_connection_meeting(app: Application, meet: str) -> None:
     with allure.step('Opening Connection meeting page'):
         try:
             start_page = StartPage(app)
-            start_page.main.meet_name.send_keys(meet)
-            start_page.main.create_meeting.click()
+            meets = start_page.main.connect_meet
+
+            if meets:
+                meets[0].webelement.click()
+            else:
+                start_page.main.meet_name.send_keys(meet)
+                start_page.main.create_meeting.click()
 
             connection_meeting_page = ConnectionMeetingPage(app)
             connection_meeting_page.wait_for_loading_connection()
@@ -126,3 +132,16 @@ def connection_meeting(app: Application, link: str, user: str) -> None:
             screenshot_attach(app, 'connection_meeting_page_error')
 
             raise TimeoutError('Connection meeting page was not loaded') from e
+
+
+def record_meeting(app: Application) -> None:
+    with allure.step('Opening Record meeting page'):
+        try:
+            ConnectionMeetingPage(app).start_record()
+            ConnectionMeetingPage(app).wait_record_meeting()
+
+            screenshot_attach(app, 'record_meeting_page')
+        except Exception as e:
+            screenshot_attach(app, 'record_meeting_page_error')
+
+            raise TimeoutError('Record meeting page was not loaded') from e
