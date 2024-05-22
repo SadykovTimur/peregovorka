@@ -16,3 +16,4 @@ parameters:
     required: true
     default: testperegovorka.mos.ru
     unit: string
+
